@@ -1,0 +1,86 @@
+<!DOCTYPE >
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Joanna Tolofari || Home</title>
+  <!-- Load Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:900|Merriweather&display=swap" rel="stylesheet">  <!-- Load Styles -->
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+  <!-- HTML Follows BEM naming conventions 
+  IDs are only used for sections to connect menu anchors to sections -->
+  <header class="page__header">
+    <nav class="navbar__menu">
+      <!-- Navigation starts as empty UL that will be populated with JS -->
+      <ul id="navbar__list"></ul>
+    </nav>
+  </header>
+  <main>
+    <section id="section1" data-nav="Home" class="your-active-class">
+    <header class="main__hero">
+      <h1>Hi! I'm Joanna Tolofari</h1>
+        <p class="title">Frontend Web & Mobile Developer</p>
+    </header>
+    </section>
+    <!-- Each Section has an ID (used for the anchor) and 
+    a data attribute that will populate the li node.
+    Adding more sections will automatically populate nav.
+    The first section is set to active class by default -->
+    <section id="section2" data-nav="About Me" class="your-active-class">
+      <div class="landing__container">
+        <h2>ABOUT ME</h2>
+        <p>
+          Passionate about Frontend development and trying to push myself into Backend 😅
+          I really love manga and classical music and I add creativity into every aspect of the work I do. 
+          I am focused on creating interactive digital experiences on the web.
+          I enjoy coding and the challenge of learning something new everyday.
+          When I'm not coding, you can find me trying new food recipes, listening to good music, and reading books that can benefit my self growth.
+          
+        </p>
+            </div>
+    </section>
+    <section id="section3" data-nav="Services">
+      <div class="landing__container">
+        <h2>SERVICES</h2>
+        <p>Web Development</p>
+        <p>Web Design</p>
+        <p>App Design</p>
+      </div>
+    </section>
+    <section id="section4" data-nav="Blog">
+      <div class="landing__container">
+        <h2>BLOG</h2>
+        <h3>
+          30 Days to Better Habits:
+          A simple step-by-step guide for forming habits that stick.
+        </h3>
+        <p>
+          Take the guesswork out of habit-building. 11 email lessons walk you through the first 30 days of a habit step-by-step, so you know exactly what to do.
+          Get the tools and strategies you need to take action. The course includes a 20-page PDF workbook (including templates and cheat sheets), plus new examples and applications that you can’t find in Atomic Habits. 
+          Learn a framework that works for any habit. You can use this course to build any good habit – from getting fit, to saving for an early retirement, to daily meditation. 
+        </p>
+      </div>
+    </section>
+    <section id="section5" data-nav="Contact">
+      <div class="landing__container">
+        <h2>CONTACT</h2>
+        <p>
+          If you are looking to get a hold of me, you can send me an email at
+          <a href="mailto:joanna.tolofari@gmail.com">joanna.tolofari@gmail.com</a>
+        </p>
+        <p>
+          You can also find me on LinkedIn here >>>
+          <a href="https://www.linkedin.com/in/joanna-tolofari-271339221">LinkedIn Page</a>
+        </p>
+      </div>
+    </section>
+  </main>
+  <footer class="page__footer">
+    <p>&copy; <span id="date"></span> Joanna Tolofari. All rights reserved.</p>
+  </footer>
+  <script defer src="js/app.js"></script>
+</body>
+</html>

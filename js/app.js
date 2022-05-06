@@ -27,6 +27,7 @@ const parts = Array.from(document.querySelectorAll('section'));
 // nav global variables
 const navBar = document.getElementById('navbar__list');
 let listItemsNo = parts.length
+const toTop = document.querySelector(".to-top");
 
 /**
  * End Global Variables
@@ -90,7 +91,16 @@ document.addEventListener('scroll', toggleActive);
 
 // Build menu 
 
-// Scroll to section on link click
+// Scroll to top on click
+
+
+window.addEventListener("scroll", () => {
+  if (window.pageYOffset > 100) {
+    toTop.classList.add("active");
+  } else {
+    toTop.classList.remove("active");
+  }
+})
 
 // Set sections as active
 

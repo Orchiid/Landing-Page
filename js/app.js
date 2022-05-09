@@ -49,8 +49,14 @@ function createList() {
 
 function viewportPart (sec) {
     let partPosition = sec.getBoundingClientRect()
-    return (partPosition.top >= 0);
+    return (
+        partPosition.top >= 0 &&
+        partPosition.left >= 0 &&
+        partPosition.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        partPosition.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
 }
+
 
 // Changes background of section viewed
 

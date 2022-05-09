@@ -97,6 +97,11 @@ section {
     transition: ease 0.3s all;
 }
 
+.navbar__menu li a:focus {
+    background: #333;
+    color: #fff;
+}
+
 @media only screen and (min-width: 35em){
     .navbar__menu .menu__link {
         display: block;

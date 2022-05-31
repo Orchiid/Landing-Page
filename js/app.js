@@ -23,12 +23,12 @@
  * 
 */
 // sections global variable
-const parts = Array.from(document.querySelectorAll('section'));
+const parts = document.querySelectorAll('section');
 // nav global variables
 const navBar = document.getElementById('navbar__list');
+const items = document.querySelectorAll('ul.navbar__list > li');
 let listItemsNo = parts.length
 const toTop = document.querySelector(".to-top");
-
 /**
  * End Global Variables
  * Start Helper Functions
@@ -40,8 +40,7 @@ function createList() {
         partLink = section.getAttribute('id');
         // create each list item
         listItem = document.createElement('li');
-        listItem.innerHTML = `<a class='menu__link' href='#${partLink}'> ${partName} </a>`
-
+        listItem.innerHTML = `<a class='menu__link' data-nav='${partLink}' href='#${partLink}'> ${partName}  </a>`
         // Add listItem to navBar
         navBar.appendChild(listItem);
     }
@@ -64,7 +63,9 @@ function toggleActive(){
     for (section of parts) {
         if (viewportPart(section)) {
             if (!section.classList.contains('your-active-class')) {
-                section.classList.add('your-active-class')
+                section.classList.add('your-active-class').scrollIntoView({ 
+                    behavior: 'smooth' 
+                  });
             }
         } else {
             section.classList.remove('your-active-class')
@@ -72,6 +73,18 @@ function toggleActive(){
     }
 }
 
+// nav-items active
+function navActive(){
+    for (li of items) {
+        if (viewportPart(li)) {
+            if (!li.classList.contains('nav-active-class')) {
+                li.classList.add('nav-active-class')
+            }
+        } else {
+            li.classList.remove('nav-active-class')
+        }
+    }
+}
 
 /**
  * End Helper Functions
@@ -82,13 +95,9 @@ function toggleActive(){
 // build the nav
 
 createList();
-
 // Add class 'active' to section when near top of viewport
-
-document.addEventListener('scroll', toggleActive);
+document.addEventListener('scroll', toggleActive, navActive);
 // Scroll to anchor ID using scrollTO event
-
-
 /**
  * End Main Functions
  * Begin Events
@@ -96,7 +105,6 @@ document.addEventListener('scroll', toggleActive);
 */
 
 // Build menu 
-
 // Scroll to top on click
 
 

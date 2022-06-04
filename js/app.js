@@ -1,113 +1,79 @@
-/**
- * 
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- * 
- * Dependencies: None
- * 
- * JS Version: ES2015/ES6
- * 
- * JS Standard: ESlint
- * 
-*/
 
-/**
- * Comments should be present at the beginning of each procedure and class.
- * Great to have comments before crucial code sections within the procedure.
-*/
+// Data structure to represent all sections for the page
+const sections = document.querySelectorAll('section');
+//create, say, an unordered list (i.e., bulleted list) in HTML from this structure, and where you be placing that list.
+const order = document.getElementById('navbar__list');
+// All nav-links for the page
+const nav = document.getElementById("navbar__list");
+const navLink = nav.getElementsByClassName("menu__link");
 
-/**
- * Define Global Variables
- * 
-*/
-// sections global variable
-const parts = Array.from(document.querySelectorAll('section'));
-// nav global variables
-const navBar = document.getElementById('navbar__list');
-let listItemsNo = parts.length
-const toTop = document.querySelector(".to-top");
-
-/**
- * End Global Variables
- * Start Helper Functions
- * 
-*/
-function createList() {
-    for (section of parts) {
-        partName = section.getAttribute('data-nav');
-        partLink = section.getAttribute('id');
-        // create each list item
-        listItem = document.createElement('li');
-        listItem.innerHTML = `<a class='menu__link' href='#${partLink}'> ${partName} </a>`
-
-        // Add listItem to navBar
-        navBar.appendChild(listItem);
-    }
+const createLi = () => {
+    // let sectionName = section.getAttribute('data-nav');
+    // let sectionLink = section.getAttribute('id');
+    //Creating the list items
+    // creating a new <li> element
+    let list1 = document.createElement('li');
+    let list2 = document.createElement('li');
+    let list3 = document.createElement('li');
+    let list4 = document.createElement('li');
+    list1.innerHTML = `<a href='#section1'  class=' active menu__link '>About Me</a>`;
+    list2.innerHTML = `<a href='#section2'  class='menu__link'>Services</a>`;
+    list3.innerHTML = `<a href='#section3'  class='menu__link'>Blog</a>`;
+    list4.innerHTML = `<a href='#section4'  class='menu__link'>Contact</a>`;
+    order.appendChild(list1);
+    order.appendChild(list2);
+    order.appendChild(list3);
+    order.appendChild(list4);
 }
+createLi();
 
-function viewportPart (sec) {
-    let partPosition = sec.getBoundingClientRect()
-    return (
-        partPosition.top >= 0 &&
-        partPosition.left >= 0 &&
-        partPosition.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        partPosition.right <= (window.innerWidth || document.documentElement.clientWidth)
-      );
-}
-
-
-// Changes background of section viewed
-
-function toggleActive(){
-    for (section of parts) {
-        if (viewportPart(section)) {
-            if (!section.classList.contains('your-active-class')) {
-                section.classList.add('your-active-class')
-            }
-        } else {
-            section.classList.remove('your-active-class')
+function makeActive(e) {
+  for (const section of sections) {
+    const box = section.getBoundingClientRect();
+    // You can play with the values in the "if" condition to further make it more accurate. 
+    if (box.top <= 150 && box.bottom >= 150) {
+      // Apply active state on the current section and the corresponding Nav link.
+        if (!section.classList.contains('your-active-class')) {
+          section.classList.add('your-active-class');
         }
+    } else {
+      // Remove active state from other section and corresponding Nav link.
+      section.classList.remove('your-active-class')
     }
+  }
 }
 
 
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
-*/
+// Make sections active
+document.addEventListener("scroll", function() {
+  makeActive();
+});
 
-// build the nav
-
-createList();
-
-// Add class 'active' to section when near top of viewport
-
-document.addEventListener('scroll', toggleActive);
-// Scroll to anchor ID using scrollTO event
-
-
-/**
- * End Main Functions
- * Begin Events
- * 
-*/
-
-// Build menu 
-
-// Scroll to top on click
+//Add smooth scrolling{got insp from codefoxx on youtube}
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+      });
+  });
+});
 
 
-window.addEventListener("scroll", () => {
-  if (window.pageYOffset > 100) {
-    toTop.classList.add("active");
-  } else {
-    toTop.classList.remove("active");
-  }
-})
+// Add active class to the current nav-link to highlight it 
+function navActive() {
+for (let i = 0; i < navLink.length; i++) {
+  navLink[i].addEventListener("click", function() {
+  let current = document.getElementsByClassName("active");
+  current[0].className = current[0].className.replace(" active", "");
+  this.className += " active";
+  });
+}}
 
-// Set sections as active
+document.addEventListener("scroll", function() {
+  navActive();
+});
+
+
 
 

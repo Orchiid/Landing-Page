@@ -10,9 +10,9 @@
 
 
 /* ---- Base Rules ---- */
-html {
+/* html {
     scroll-behavior: smooth;
-}
+} */
 
 
 body {
@@ -67,13 +67,17 @@ main {
 
 section {
     position: relative;
+    height: 80vh;
 }
 
 
 /* ---- Module Rules ---- */
 
 /* Navigation Styles*/
-
+.active {
+    background: rgb(0, 0, 0);
+    color: whitesmoke !important;
+}
 .navbar__menu ul {
     text-align:unset;
 }
@@ -95,11 +99,6 @@ section {
     background: #333;
     color: #fff;
     transition: ease 0.3s all;
-}
-
-.navbar__menu li a:focus {
-    background: #333;
-    color: #fff;
 }
 
 @media only screen and (min-width: 35em){
@@ -158,7 +157,7 @@ section {
   transition: all .4s;
 }
 
-.to-top.active {
+.to-top.act {
   bottom:32px;
   pointer-events: auto;
   opacity:1;

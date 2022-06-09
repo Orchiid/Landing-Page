@@ -1,29 +1,26 @@
-
 // Data structure to represent all sections for the page
-const sections = document.querySelectorAll('section');
+const sections = Array.from(document.getElementsByTagName("section")); 
 //create, say, an unordered list (i.e., bulleted list) in HTML from this structure, and where you be placing that list.
 const order = document.getElementById('navbar__list');
 // All nav-links for the page
 const nav = document.getElementById("navbar__list");
 const navLink = nav.getElementsByClassName("menu__link");
+//scroll to top of site
+const toTop = document.querySelector(".to-top");
+//Hide nav 
+const header = document.querySelector('.page__header')
 
 const createLi = () => {
-    // let sectionName = section.getAttribute('data-nav');
-    // let sectionLink = section.getAttribute('id');
-    //Creating the list items
-    // creating a new <li> element
-    let list1 = document.createElement('li');
-    let list2 = document.createElement('li');
-    let list3 = document.createElement('li');
-    let list4 = document.createElement('li');
-    list1.innerHTML = `<a href='#section1'  class=' active menu__link '>About Me</a>`;
-    list2.innerHTML = `<a href='#section2'  class='menu__link'>Services</a>`;
-    list3.innerHTML = `<a href='#section3'  class='menu__link'>Blog</a>`;
-    list4.innerHTML = `<a href='#section4'  class='menu__link'>Contact</a>`;
-    order.appendChild(list1);
-    order.appendChild(list2);
-    order.appendChild(list3);
-    order.appendChild(list4);
+    for(section of sections){
+      const listItem = document.createElement('li');
+      const listItemLink=document.createElement('a');
+      // use the section data-nav to fill the <a> tag
+      listItemLink.className='menu__link';
+      listItemLink.href = '#'+section.id;
+      listItemLink.textContent=section.dataset.nav;
+      listItem.appendChild(listItemLink);
+      order.appendChild(listItem);
+    }
 }
 createLi();
 
@@ -74,6 +71,42 @@ document.addEventListener("scroll", function() {
   navActive();
 });
 
+//Scroll To Top
+window.addEventListener("scroll", () => {
+  if (window.pageYOffset > 100) {
+    toTop.classList.add("act");
+    toTop.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+
+        left: 0,
+        behavior: 'smooth'
+      });
+    })
+  } else {
+    toTop.classList.remove("act");
+  }
+})
 
 
+//Hide nav
 
+const hideNav = () => {
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 100) {
+      header.style.display = "none";
+    }else{
+      header.style.display = "initial";
+    }
+  })
+}
+
+let scrollPos = false;
+   window.addEventListener('scroll', function(){
+      if( !scrollPos ) {
+         scrollPos = true;
+         (!window.requestAnimationFrame)
+            ? setTimeout(hideNav, 250)
+            : requestAnimationFrame(hideNav);
+      }
+});
